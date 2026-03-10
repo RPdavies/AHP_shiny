@@ -107,7 +107,7 @@ setup_tab_ui <- function() {
          "default_strength",
          "Default strength",
          value = 3,
-         min = 1,
+         min = 2,
          max = 9,
          step = 1
         )

@@ -141,9 +141,9 @@ evaluate_tasks_server <- function(input, output, session, rv) {
   strength <- if (choice == "equal") {
    1
   } else if (isTRUE(input$use_strength)) {
-   input$strength_task
+   max(2, as.numeric(input$strength_task))
   } else {
-   input$default_strength
+   max(2, as.numeric(input$default_strength))
   }
   
   rv$evaluations <- rbind(
@@ -332,7 +332,7 @@ evaluate_tasks_server <- function(input, output, session, rv) {
    if (isTRUE(input$use_strength)) {
     tagList(
      div(class = "spacer12"),
-     sliderInput("strength_task", "Strength", min = 1, max = 9, value = 3, step = 1)
+     sliderInput("strength_task", "Strength", min = 2, max = 9, value = 3, step = 1)
     )
    } else {
     tagList(

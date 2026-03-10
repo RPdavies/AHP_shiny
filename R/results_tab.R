@@ -8,25 +8,9 @@ results_tab_ui <- function() {
    
    card(
     card_header("Final ranking"),
-    div(class = "muted", "Global task ranking will appear here once criteria and task weights are aggregated."),
+    div(class = "muted", "Global task ranking from criteria weights × local task weights."),
     div(class = "spacer8"),
-    div(
-     class = "smalltable",
-     tags$table(
-      tags$thead(
-       tags$tr(
-        tags$th("#"),
-        tags$th("Task"),
-        tags$th("Global weight")
-       )
-      ),
-      tags$tbody(
-       tags$tr(tags$td("1"), tags$td("Finish slides"), tags$td("...")),
-       tags$tr(tags$td("2"), tags$td("Review paper"), tags$td("...")),
-       tags$tr(tags$td("3"), tags$td("Admin emails"), tags$td("..."))
-      )
-     )
-    )
+    div(class = "smalltable", uiOutput("global_ranking_ui"))
    ),
    
    div(

@@ -10,6 +10,7 @@ source("R/evaluate_helpers.R", local = TRUE)
 source("R/evaluate_criteria_server.R", local = TRUE)
 source("R/evaluate_tasks_server.R", local = TRUE)
 source("R/evaluate_server.R", local = TRUE)
+source("R/results_server.R", local = TRUE)
 
 ui <- page_fillable(
  theme = bs_theme(
@@ -67,6 +68,7 @@ server <- function(input, output, session) {
  
  setup_server(input, output, session, rv)
  evaluate_server(input, output, session, rv)
+ results_server(input, output, session, rv)
 }
 
 shinyApp(ui, server)
