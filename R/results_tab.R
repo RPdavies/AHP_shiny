@@ -34,21 +34,33 @@ results_tab_ui <- function() {
    col_widths = c(7, 5),
    gap = "12px",
    
+   # card(
+   #  card_header("Task weights by criterion (live)"),
+   #  
+   #  selectInput(
+   #   "results_criterion_sel",
+   #   "Criterion",
+   #   choices = character()
+   #  ),
+   #  
+   #  div(
+   #   class = "muted",
+   #   "This preview uses the same task set as the Evaluate tab, including the ⭐ Today filter if enabled."
+   #  ),
+   #  div(class = "spacer8"),
+   #  div(class = "smalltable", uiOutput("task_weights_preview_ui"))
+   # ),
+   
    card(
-    card_header("Task weights by criterion (live)"),
-    
-    selectInput(
-     "results_criterion_sel",
-     "Criterion",
-     choices = character()
-    ),
+    card_header("Task × criterion heatmap"),
     
     div(
      class = "muted",
-     "This preview uses the same task set as the Evaluate tab, including the ⭐ Today filter if enabled."
+     "Rows are tasks ordered by global priority; columns are criteria ordered by criteria weight; cells are local task weights."
     ),
     div(class = "spacer8"),
-    div(class = "smalltable", uiOutput("task_weights_preview_ui"))
+    
+    plotOutput("task_criterion_heatmap", height = "340px")
    ),
    
    card(
