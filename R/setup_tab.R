@@ -47,7 +47,11 @@ setup_tab_ui <- function() {
      card(
       card_header("Task list"),
       
-      textInput("task_search", "Search", placeholder = "Filter tasks..."),
+      layout_columns(
+       col_widths = c(8, 4),
+       textInput("task_search", "Search", placeholder = "Filter tasks..."),
+       checkboxInput("show_shortlist", "Show only ⭐ Today", value = FALSE)
+      ),
       
       div(class = "section-subtitle", "Tasks"),
       div(
@@ -56,7 +60,7 @@ setup_tab_ui <- function() {
       ),
       
       div(class = "spacer8"),
-      div(class = "placeholder-note", "Inline editing can be the next step once add/delete feels solid.")
+      div(class = "placeholder-note", "You can now add, delete, search, and mark tasks for today.")
      )
     )
    ),
@@ -89,7 +93,7 @@ setup_tab_ui <- function() {
        ),
        
        div(class = "spacer8"),
-       div(class = "placeholder-note", "Criteria are still UI-only for now.")
+       div(class = "placeholder-note", "You can now add criteria and toggle whether they should be inverted.")
       ),
       
       card(
@@ -122,24 +126,11 @@ setup_tab_ui <- function() {
       div(class = "section-subtitle", "Criteria"),
       div(
        class = "smalltable",
-       tags$table(
-        tags$thead(
-         tags$tr(
-          tags$th("Criterion"),
-          tags$th("Invert?"),
-          tags$th("")
-         )
-        ),
-        tags$tbody(
-         tags$tr(tags$td("Urgency"), tags$td("☐"), tags$td("🗑")),
-         tags$tr(tags$td("Importance"), tags$td("☐"), tags$td("🗑")),
-         tags$tr(tags$td("Difficulty"), tags$td("☑"), tags$td("🗑"))
-        )
-       )
+       uiOutput("criteria_table_ui")
       ),
       
       div(class = "spacer8"),
-      div(class = "placeholder-note", "Criteria add/delete will be the next parallel component.")
+      div(class = "placeholder-note", "Suggested defaults: Urgency, Importance, Difficulty.")
      )
     )
    )

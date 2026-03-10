@@ -30,12 +30,27 @@ new_task_row <- function(id, label, tag = "", today = FALSE, active = TRUE) {
  )
 }
 
+new_criterion_row <- function(id, label, invert = FALSE, active = TRUE) {
+ data.frame(
+  id = id,
+  label = label,
+  invert = invert,
+  active = active,
+  stringsAsFactors = FALSE
+ )
+}
+
 init_app_state <- function() {
  reactiveValues(
   tasks = empty_tasks(),
   criteria = empty_criteria(),
   task_counter = 0L,
   criterion_counter = 0L,
-  bound_delete_ids = character()
+  
+  task_delete_bound_ids = character(),
+  task_today_bound_ids = character(),
+  
+  criterion_delete_bound_ids = character(),
+  criterion_invert_bound_ids = character()
  )
 }
