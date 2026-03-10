@@ -1,0 +1,144 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #f8f9fa;
+}
+
+.app-body {
+  padding: 12px;
+}
+
+.topbar {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.9);
+}
+
+.topbar h4 {
+  margin: 0;
+}
+
+.topbar .form-group,
+.topbar .shiny-input-radiogroup {
+  margin-bottom: 0;
+}
+
+.topbar-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.muted {
+  color: rgba(0,0,0,0.55);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.05);
+  font-size: 0.9rem;
+}
+
+.section-subtitle {
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.placeholder-note {
+  color: rgba(0,0,0,0.5);
+  font-style: italic;
+}
+
+.smalltable table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.smalltable th,
+.smalltable td {
+  padding: 8px 10px;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  vertical-align: middle;
+}
+
+.smalltable th {
+  font-weight: 700;
+}
+
+.stack-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-row.center {
+  justify-content: center;
+}
+
+.pick-tile > button {
+  width: 100%;
+  min-height: 120px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,0.12);
+  background: rgba(255,255,255,0.78);
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 18px;
+  white-space: normal;
+  line-height: 1.25;
+}
+
+.pick-tile > button:hover {
+  background: rgba(0,0,0,0.03);
+}
+
+.pick-tile.equal > button {
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+.spacer8 {
+  height: 8px;
+}
+
+.spacer12 {
+  height: 12px;
+}
+
+.spacer16 {
+  height: 16px;
+}
+
+.mt-6 {
+  margin-top: 6px;
+}
+
+.pt-31 {
+  padding-top: 31px;
+}
+
+.nav-tabs .nav-link {
+  font-weight: 600;
+}
