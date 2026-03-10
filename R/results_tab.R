@@ -8,10 +8,8 @@ results_tab_ui <- function() {
    
    card(
     card_header("Final ranking"),
-    
-    div(class = "muted", "This will update once the AHP calculations are wired in."),
+    div(class = "muted", "Global task ranking will appear here once criteria and task weights are aggregated."),
     div(class = "spacer8"),
-    
     div(
      class = "smalltable",
      tags$table(
@@ -23,19 +21,11 @@ results_tab_ui <- function() {
        )
       ),
       tags$tbody(
-       tags$tr(tags$td("1"), tags$td("Finish slides"), tags$td("0.31")),
-       tags$tr(tags$td("2"), tags$td("Review paper"), tags$td("0.25")),
-       tags$tr(tags$td("3"), tags$td("Admin emails"), tags$td("0.17"))
+       tags$tr(tags$td("1"), tags$td("Finish slides"), tags$td("...")),
+       tags$tr(tags$td("2"), tags$td("Review paper"), tags$td("...")),
+       tags$tr(tags$td("3"), tags$td("Admin emails"), tags$td("..."))
       )
      )
-    ),
-    
-    div(class = "spacer12"),
-    div(
-     class = "btn-row",
-     actionButton("pin_top3", "Pin top 3"),
-     actionButton("export_csv", "Download CSV"),
-     actionButton("copy_clip", "Copy")
     )
    ),
    
@@ -43,41 +33,43 @@ results_tab_ui <- function() {
     class = "stack-col",
     
     card(
-     card_header("Criteria weights"),
-     
-     tags$ul(
-      tags$li(strong("Urgency: "), "0.58"),
-      tags$li(strong("Importance: "), "0.28"),
-      tags$li(strong("Difficulty: "), "0.14")
-     ),
-     
-     div(class = "placeholder-note", "Local task weights can also go here later.")
+     card_header("Criteria weights (live)"),
+     uiOutput("criteria_weights_preview_ui")
     ),
     
     card(
-     card_header("Consistency diagnostics"),
-     
-     div(
-      class = "smalltable",
-      tags$table(
-       tags$thead(
-        tags$tr(
-         tags$th("Matrix"),
-         tags$th("CR"),
-         tags$th("OK?")
-        )
-       ),
-       tags$tbody(
-        tags$tr(tags$td("Criteria"), tags$td("0.13"), tags$td("⚠")),
-        tags$tr(tags$td("Urgency tasks"), tags$td("0.11"), tags$td("⚠")),
-        tags$tr(tags$td("Importance tasks"), tags$td("0.03"), tags$td("✓"))
-       )
-      )
-     ),
-     
-     div(class = "spacer8"),
-     actionButton("review_problem_pairs", "Review problem pairs")
+     card_header("Criteria comparison log"),
+     div(class = "smalltable", uiOutput("criteria_eval_log_ui"))
     )
+   )
+  ),
+  
+  div(class = "spacer12"),
+  
+  layout_columns(
+   col_widths = c(7, 5),
+   gap = "12px",
+   
+   card(
+    card_header("Task weights by criterion (live)"),
+    
+    selectInput(
+     "results_criterion_sel",
+     "Criterion",
+     choices = character()
+    ),
+    
+    div(
+     class = "muted",
+     "This preview uses the same task set as the Evaluate tab, including the ⭐ Today filter if enabled."
+    ),
+    div(class = "spacer8"),
+    div(class = "smalltable", uiOutput("task_weights_preview_ui"))
+   ),
+   
+   card(
+    card_header("Task comparison log"),
+    div(class = "smalltable", uiOutput("task_eval_log_ui"))
    )
   )
  )

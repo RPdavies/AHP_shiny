@@ -5,7 +5,6 @@ evaluate_tab_ui <- function() {
   navset_tab(
    nav_panel(
     "Criteria comparisons",
-    
     div(class = "spacer8"),
     uiOutput("criteria_progress_ui"),
     div(class = "spacer12"),
@@ -25,7 +24,10 @@ evaluate_tab_ui <- function() {
      checkboxInput("shortlist_only", "Only compare ⭐ Today tasks", value = TRUE)
     ),
     
-    div(class = "placeholder-note", "Task comparisons will be wired next.")
+    div(class = "spacer8"),
+    uiOutput("task_progress_ui"),
+    div(class = "spacer12"),
+    uiOutput("task_compare_area_ui")
    )
   )
  )

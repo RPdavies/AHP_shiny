@@ -6,6 +6,9 @@ source("R/setup_tab.R", local = TRUE)
 source("R/evaluate_tab.R", local = TRUE)
 source("R/results_tab.R", local = TRUE)
 source("R/setup_server.R", local = TRUE)
+source("R/evaluate_helpers.R", local = TRUE)
+source("R/evaluate_criteria_server.R", local = TRUE)
+source("R/evaluate_tasks_server.R", local = TRUE)
 source("R/evaluate_server.R", local = TRUE)
 
 ui <- page_fillable(

@@ -277,6 +277,16 @@ setup_server <- function(input, output, session, rv) {
     this_id <- id
     observeEvent(input[[paste0("delete_task_", this_id)]], {
      rv$tasks <- rv$tasks[rv$tasks$id != this_id, , drop = FALSE]
+     
+     # remove any evaluations involving this task
+     if (nrow(rv$evaluations) > 0) {
+      rv$evaluations <- rv$evaluations[
+       !(rv$evaluations$left_id == this_id | rv$evaluations$right_id == this_id),
+       ,
+       drop = FALSE
+      ]
+     }
+     
      showNotification("Task deleted.", type = "message")
     }, ignoreInit = TRUE)
    })
@@ -388,6 +398,22 @@ setup_server <- function(input, output, session, rv) {
     this_id <- id
     observeEvent(input[[paste0("delete_criterion_", this_id)]], {
      rv$criteria <- rv$criteria[rv$criteria$id != this_id, , drop = FALSE]
+     
+     # remove criteria-level evaluations involving this criterion
+     # and task-level evaluations attached to this criterion
+     if (nrow(rv$evaluations) > 0) {
+      rv$evaluations <- rv$evaluations[
+       !(
+        (rv$evaluations$level == "criteria" &
+          (rv$evaluations$left_id == this_id | rv$evaluations$right_id == this_id)) |
+         (rv$evaluations$level == "task" &
+           rv$evaluations$criterion_id == this_id)
+       ),
+       ,
+       drop = FALSE
+      ]
+     }
+     
      showNotification("Criterion deleted.", type = "message")
     }, ignoreInit = TRUE)
    })

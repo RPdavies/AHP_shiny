@@ -97,26 +97,39 @@ body {
   justify-content: center;
 }
 
-.pick-tile > button {
+.pick-tile > button,
+.pick-tile > .btn {
   width: 100%;
   min-height: 120px;
   border-radius: 18px;
-  border: 1px solid rgba(0,0,0,0.12);
-  background: rgba(255,255,255,0.78);
+  border: 1px solid rgba(0,0,0,0.12) !important;
+  background: rgba(255,255,255,0.92) !important;
+  color: #2c3e50 !important;
   font-weight: 700;
   font-size: 1.2rem;
   padding: 18px;
   white-space: normal;
   line-height: 1.25;
+  box-shadow: none !important;
+  text-align: center;
 }
 
-.pick-tile > button:hover {
-  background: rgba(0,0,0,0.03);
+.pick-tile > button:hover,
+.pick-tile > .btn:hover,
+.pick-tile > button:focus,
+.pick-tile > .btn:focus,
+.pick-tile > button:active,
+.pick-tile > .btn:active {
+  background: #eef3f7 !important;
+  color: #2c3e50 !important;
+  border-color: rgba(0,0,0,0.18) !important;
+  box-shadow: none !important;
 }
 
-.pick-tile.equal > button {
+.pick-tile.equal > button,
+.pick-tile.equal > .btn {
+  color: #5f6b77 !important;
   font-weight: 700;
-  opacity: 0.9;
 }
 
 .spacer8 {
