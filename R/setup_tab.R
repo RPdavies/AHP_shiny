@@ -35,7 +35,7 @@ setup_tab_ui <- function() {
          actionButton("add_all", "Add All"),
          actionButton("clear_bulk", "Clear")
         ),
-        div(class = "muted mt-6", "Preview not wired yet")
+        div(class = "muted mt-6", "One task per line is easiest, but commas also work.")
        ),
        open = FALSE
       ),
@@ -47,49 +47,16 @@ setup_tab_ui <- function() {
      card(
       card_header("Task list"),
       
-      layout_columns(
-       col_widths = c(8, 4),
-       textInput("task_search", "Search", placeholder = "Filter tasks..."),
-       checkboxInput("show_shortlist", "Show only ⭐ Today", value = FALSE)
-      ),
+      textInput("task_search", "Search", placeholder = "Filter tasks..."),
       
       div(class = "section-subtitle", "Tasks"),
       div(
        class = "smalltable",
-       tags$table(
-        tags$thead(
-         tags$tr(
-          tags$th("Task"),
-          tags$th("Tag"),
-          tags$th("⭐ Today"),
-          tags$th("")
-         )
-        ),
-        tags$tbody(
-         tags$tr(
-          tags$td("Finish slides"),
-          tags$td("Presentation"),
-          tags$td("☐"),
-          tags$td("🗑")
-         ),
-         tags$tr(
-          tags$td("Review paper"),
-          tags$td("Research"),
-          tags$td("☑"),
-          tags$td("🗑")
-         ),
-         tags$tr(
-          tags$td("Admin emails"),
-          tags$td("Admin"),
-          tags$td("☐"),
-          tags$td("🗑")
-         )
-        )
-       )
+       uiOutput("tasks_table_ui")
       ),
       
       div(class = "spacer8"),
-      div(class = "placeholder-note", "Later this can become an editable spreadsheet-style table.")
+      div(class = "placeholder-note", "Inline editing can be the next step once add/delete feels solid.")
      )
     )
    ),
@@ -122,7 +89,7 @@ setup_tab_ui <- function() {
        ),
        
        div(class = "spacer8"),
-       div(class = "placeholder-note", "Suggested defaults could include Urgency, Importance, Difficulty.")
+       div(class = "placeholder-note", "Criteria are still UI-only for now.")
       ),
       
       card(
@@ -172,7 +139,7 @@ setup_tab_ui <- function() {
       ),
       
       div(class = "spacer8"),
-      div(class = "placeholder-note", "Invert is useful for effort/difficulty-style criteria.")
+      div(class = "placeholder-note", "Criteria add/delete will be the next parallel component.")
      )
     )
    )

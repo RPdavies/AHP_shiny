@@ -1,9 +1,11 @@
 library(shiny)
 library(bslib)
 
+source("R/state.R", local = TRUE)
 source("R/setup_tab.R", local = TRUE)
 source("R/evaluate_tab.R", local = TRUE)
 source("R/results_tab.R", local = TRUE)
+source("R/setup_server.R", local = TRUE)
 
 ui <- page_fillable(
  theme = bs_theme(
@@ -22,16 +24,10 @@ ui <- page_fillable(
    
    div(
     h4("AHP Task Prioritiser"),
-    div(class = "muted", "MVP • UI only")
+    div(class = "muted", "MVP • tasks are now live")
    ),
    
-   div(
-    class = "topbar-center",
-    span(class = "chip", "Status:", strong("Ready")),
-    span(class = "chip", "Tasks:", strong("0")),
-    span(class = "chip", "Criteria:", strong("0")),
-    span(class = "chip", "Comparisons:", strong("0 / 0"))
-   ),
+   uiOutput("status_chips_ui"),
    
    div(
     class = "topbar-right",
@@ -63,7 +59,8 @@ ui <- page_fillable(
 )
 
 server <- function(input, output, session) {
- # UI only for now
+ rv <- init_app_state()
+ setup_server(input, output, session, rv)
 }
 
 shinyApp(ui, server)
