@@ -177,7 +177,11 @@ setup_server <- function(input, output, session, rv) {
     span(class = "muted", sprintf("(%d shortlisted)", sum(rv$tasks$today)))
    ),
    span(class = "chip", "Criteria:", strong(nrow(rv$criteria))),
-   span(class = "chip", "Comparisons:", strong("0 / 0"))
+   span(
+    class = "chip",
+    "Comparisons:",
+    strong(sprintf("%d / %d", rv$criteria_progress_done, rv$criteria_progress_total))
+   )
   )
  })
  
