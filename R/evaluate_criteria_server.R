@@ -54,6 +54,33 @@ evaluate_criteria_server <- function(input, output, session, rv) {
  })
  
  observe({
+  crit <- rv$criteria
+  
+  if (nrow(crit) == 0) {
+   updateSelectInput(
+    session,
+    "criteria_reset_sel",
+    choices = character(),
+    selected = character()
+   )
+  } else {
+   choices <- stats::setNames(crit$id, crit$label)
+   
+   selected_now <- isolate(input$criteria_reset_sel)
+   if (is.null(selected_now) || !selected_now %in% crit$id) {
+    selected_now <- crit$id[1]
+   }
+   
+   updateSelectInput(
+    session,
+    "criteria_reset_sel",
+    choices = choices,
+    selected = selected_now
+   )
+  }
+ })
+ 
+ observe({
   total <- nrow(criteria_pairs_all())
   done <- total - nrow(criteria_pairs_remaining())
   
@@ -106,6 +133,39 @@ evaluate_criteria_server <- function(input, output, session, rv) {
  
  observeEvent(input$pick_right_crit, {
   record_criteria_choice("right")
+ }, ignoreInit = TRUE)
+ 
+ observeEvent(input$clear_selected_criteria_comparisons, {
+  cid <- input$criteria_reset_sel
+  
+  if (is.null(cid) || !nzchar(cid)) {
+   showNotification("Please select a criterion first.", type = "error")
+   return()
+  }
+  
+  old_n <- nrow(rv$evaluations)
+  
+  rv$evaluations <- rv$evaluations[
+   !(
+    rv$evaluations$level == "criteria" &
+     (rv$evaluations$left_id == cid | rv$evaluations$right_id == cid)
+   ),
+   ,
+   drop = FALSE
+  ]
+  
+  removed_n <- old_n - nrow(rv$evaluations)
+  crit_label <- rv$criteria$label[match(cid, rv$criteria$id)]
+  
+  showNotification(
+   sprintf(
+    "Removed %d criteria comparison%s involving %s.",
+    removed_n,
+    if (removed_n == 1) "" else "s",
+    crit_label
+   ),
+   type = "message"
+  )
  }, ignoreInit = TRUE)
  
  criteria_pcm <- reactive({

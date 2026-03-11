@@ -185,6 +185,39 @@ evaluate_tasks_server <- function(input, output, session, rv) {
   record_task_choice("right")
  }, ignoreInit = TRUE)
  
+ observeEvent(input$clear_task_comparisons_for_criterion, {
+  cid <- selected_task_criterion_id()
+  
+  if (is.na(cid)) {
+   showNotification("Please select a criterion first.", type = "error")
+   return()
+  }
+  
+  old_n <- nrow(rv$evaluations)
+  
+  rv$evaluations <- rv$evaluations[
+   !(
+    rv$evaluations$level == "task" &
+     rv$evaluations$criterion_id == cid
+   ),
+   ,
+   drop = FALSE
+  ]
+  
+  removed_n <- old_n - nrow(rv$evaluations)
+  crit_label <- rv$criteria$label[match(cid, rv$criteria$id)]
+  
+  showNotification(
+   sprintf(
+    "Removed %d task comparison%s for %s.",
+    removed_n,
+    if (removed_n == 1) "" else "s",
+    crit_label
+   ),
+   type = "message"
+  )
+ }, ignoreInit = TRUE)
+ 
  selected_results_criterion_id <- reactive({
   cid <- input$results_criterion_sel
   if (is.null(cid) || !nzchar(cid)) {
