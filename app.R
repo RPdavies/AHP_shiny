@@ -12,6 +12,8 @@ source("R/evaluate_tasks_server.R", local = TRUE)
 source("R/evaluate_server.R", local = TRUE)
 source("R/results_server.R", local = TRUE)
 source("R/results_heatmap_server.R", local = TRUE)
+source("R/project_io.R", local = TRUE)
+source("R/project_server.R", local = TRUE)
 
 ui <- page_fillable(
  theme = bs_theme(
@@ -44,7 +46,7 @@ ui <- page_fillable(
      selected = "Daily",
      inline = TRUE
     ),
-    actionButton("save", "Save"),
+    downloadButton("download_project", "Save"),
     actionButton("load", "Load"),
     actionButton("reset", "Reset")
    )
@@ -71,6 +73,7 @@ server <- function(input, output, session) {
  evaluate_server(input, output, session, rv)
  results_server(input, output, session, rv)
  results_heatmap_server(input, output, session, rv)
+ project_server(input, output, session, rv)
 }
 
 shinyApp(ui, server)
