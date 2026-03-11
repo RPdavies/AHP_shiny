@@ -1,3 +1,16 @@
+# invert_task_pcm_if_needed <- function(obj, criterion_id, rv) {
+#  if (is.null(obj)) {
+#   return(NULL)
+#  }
+#  
+#  idx <- match(criterion_id, rv$criteria$id)
+#  if (!is.na(idx) && isTRUE(rv$criteria$invert[idx])) {
+#   obj$pcm <- t(obj$pcm)
+#  }
+#  
+#  obj
+# }
+
 evaluate_tasks_server <- function(input, output, session, rv) {
  
  observe({
@@ -204,7 +217,8 @@ evaluate_tasks_server <- function(input, output, session, rv) {
    ]
   }
   
-  build_pcm(tasks[, c("id", "label"), drop = FALSE], ev)
+  obj <- build_pcm(tasks[, c("id", "label"), drop = FALSE], ev)
+  invert_task_pcm_if_needed(obj, cid, rv)
  })
  
  task_weights_selected_df <- reactive({

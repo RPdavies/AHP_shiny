@@ -1,3 +1,17 @@
+invert_task_pcm_if_needed <- function(obj, criterion_id, rv) {
+ if (is.null(obj)) {
+  return(NULL)
+ }
+ 
+ idx <- match(criterion_id, rv$criteria$id)
+ if (!is.na(idx) && isTRUE(rv$criteria$invert[idx])) {
+  obj$pcm <- t(obj$pcm)
+ }
+ 
+ obj
+}
+
+
 pair_key <- function(left_id, right_id) {
  ifelse(
   left_id <= right_id,

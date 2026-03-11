@@ -73,6 +73,8 @@ results_heatmap_server <- function(input, output, session, rv) {
    }
    
    obj <- build_pcm(tasks[, c("id", "label"), drop = FALSE], ev)
+   obj <- invert_task_pcm_if_needed(obj, cid, rv)
+   
    if (is.null(obj) || !isTRUE(obj$complete)) {
     return(NULL)
    }
